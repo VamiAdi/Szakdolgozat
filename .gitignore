@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 szakdoga*
 .vs/szakdolgozat/FileCon*
+.env
+.env.local

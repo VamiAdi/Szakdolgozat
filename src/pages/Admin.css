@@ -1,0 +1,343 @@
+.admin-bg {
+    min-height: 100vh;
+    background: linear-gradient(155deg, #f6f2fb 0%, #ede4f7 55%, #e8eef5 100%);
+    padding: 2rem 1rem 3rem;
+    box-sizing: border-box;
+}
+
+.admin-max {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.admin-login-kartya,
+.admin-panel {
+    background: #fff;
+    border-radius: 18px;
+    border: 1px solid #e9def2;
+    box-shadow: 0 14px 40px rgba(90, 63, 107, 0.09);
+    padding: 2rem 2rem 2.25rem;
+}
+
+.admin-cim-sor {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+}
+
+.admin-cim-sor h1 {
+    margin: 0;
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: #402652;
+}
+
+.admin-eyebrow {
+    display: block;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #8c6eab;
+    margin-bottom: 0.35rem;
+    text-align: center;
+}
+
+.admin-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.62rem 1.15rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+}
+
+.admin-btn.primary {
+    background: linear-gradient(135deg, #7b4f9a 0%, #55357a 100%);
+    color: #fff;
+}
+
+.admin-btn.primary:hover {
+    filter: brightness(1.05);
+}
+
+.admin-btn.primary.szurke,
+.admin-btn.primary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.admin-btn.ghost {
+    background: transparent;
+    color: #6b4190;
+    border: 1px solid #d9c9e8;
+}
+
+.admin-mezogroup {
+    margin-bottom: 1.15rem;
+}
+
+.admin-mezogroup label {
+    display: block;
+    margin-bottom: 0.42rem;
+    font-size: 0.89rem;
+    font-weight: 600;
+    color: #533564;
+}
+
+.admin-input,
+.admin-select,
+.admin-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #dfd3eb;
+    border-radius: 10px;
+    padding: 0.62rem 0.72rem;
+    font-size: 0.96rem;
+    font-family: inherit;
+    background: #fafafa;
+}
+
+.admin-input:focus,
+.admin-select:focus,
+.admin-textarea:focus {
+    outline: none;
+    border-color: #a67bc4;
+    background: #fff;
+}
+
+.admin-textarea {
+    resize: vertical;
+    min-height: 92px;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 640px) {
+    .admin-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.admin-hiba {
+    background: #fdeef0;
+    color: #7a2940;
+    border-radius: 10px;
+    padding: 0.65rem 0.85rem;
+    margin-bottom: 1rem;
+    font-size: 0.92rem;
+}
+
+.admin-info {
+    background: #e8f7ef;
+    color: #276044;
+    border-radius: 10px;
+    padding: 0.65rem 0.85rem;
+    margin-bottom: 1rem;
+    font-size: 0.92rem;
+}
+
+.admin-spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: admin-spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 0.45rem;
+}
+
+@keyframes admin-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.admin-help {
+    font-size: 0.82rem;
+    color: #7a6590;
+    margin-top: 0.38rem;
+    line-height: 1.45;
+}
+
+.admin-tbl-wrap {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+    border: 1px solid #e9def2;
+    border-radius: 12px;
+}
+
+.admin-tbl {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.86rem;
+}
+
+.admin-tbl th,
+.admin-tbl td {
+    padding: 0.55rem 0.65rem;
+    text-align: left;
+    border-bottom: 1px solid #efe8f5;
+    vertical-align: top;
+}
+
+.admin-tbl th {
+    background: #f6f1fb;
+    color: #402652;
+    font-weight: 600;
+}
+
+.admin-tbl tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-tbl .cell-id {
+    width: 3rem;
+    color: #8c6eab;
+    font-variant-numeric: tabular-nums;
+}
+
+.admin-szekcio-cim {
+    margin: 0 0 1rem;
+    font-size: 1.15rem;
+    color: #402652;
+}
+
+.admin-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.1rem;
+}
+
+.admin-tab {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid #d9c9e8;
+    background: #faf8fc;
+    color: #6b4190;
+    font-family: inherit;
+}
+
+.admin-tab:hover {
+    border-color: #c4aad8;
+}
+
+.admin-tab.aktiv {
+    border-color: #8c5eb0;
+    background: linear-gradient(135deg, #f4ecfa 0%, #ebe2f6 100%);
+    color: #402652;
+    box-shadow: 0 2px 8px rgba(91, 55, 120, 0.12);
+}
+
+.admin-import-hibalista {
+    margin: 0.55rem 0 0;
+    padding-left: 1.2rem;
+    line-height: 1.45;
+}
+
+.admin-import-hibalista li {
+    margin-bottom: 0.35rem;
+}
+
+.admin-sorszam {
+    font-weight: 700;
+}
+
+.admin-csv-blokk {
+    margin-top: 0.25rem;
+}
+
+.admin-csv-sor {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: 1rem;
+}
+
+.admin-csv-rejtett {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.admin-csv-fajl-label {
+    cursor: pointer;
+}
+
+.admin-csv-fajlnev {
+    flex: 1;
+    min-width: 140px;
+    font-size: 0.88rem;
+    color: #5b4570;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-btn.veszely {
+    background: #fff5f7;
+    color: #842338;
+    border: 1px solid #e9c2cb;
+}
+
+.admin-btn.veszely:hover:not(:disabled) {
+    filter: brightness(0.97);
+}
+
+.admin-btn-kompakt {
+    padding: 0.42rem 0.65rem;
+    font-size: 0.8rem;
+}
+
+.admin-tbl-input {
+    min-width: 4rem;
+    padding: 0.38rem 0.45rem;
+    font-size: 0.82rem;
+}
+
+.admin-tbl-ism {
+    width: 3.8rem;
+}
+
+.admin-tbl-textarea {
+    min-width: 8rem;
+    min-height: 52px;
+    resize: vertical;
+    font-size: 0.82rem;
+}
+
+.admin-tbl-akcio-sor {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.admin-tbl .cell-ism {
+    width: 4.2rem;
+}
+
+.admin-tbl .cell-muv {
+    width: 7rem;
+}

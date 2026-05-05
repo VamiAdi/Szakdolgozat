@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+    --c-primary: #8E24AA;
+    --c-light: #F4EBFC;
+    --c-dark: #4A148C;
+    --c-text: #1E1326;
+    --c-white: #FFFFFF;
+    --c-border: #CE93D8;
+    --c-placeholder: #E1BEE7;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.kap-page {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--c-text);
+    min-height: calc(100vh - 75px);
+}
+
+/* ── Hero ── */
+.kap-hero {
+    background: var(--c-light);
+    padding: 4.5rem 2rem 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.kap-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(206, 147, 216, 0.15);
+    pointer-events: none;
+}
+
+.kap-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.kap-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-primary);
+    background: rgba(142, 36, 170, 0.08);
+    border: 1px solid rgba(142, 36, 170, 0.2);
+    border-radius: 100px;
+    padding: 5px 14px;
+    margin-bottom: 1.25rem;
+}
+
+.kap-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: var(--c-dark);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.9rem;
+}
+
+.kap-title em {
+    font-style: italic;
+    color: var(--c-primary);
+}
+
+.kap-subtitle {
+    font-size: 1rem;
+    color: #5a3f6b;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+/* ── Body ── */
+.kap-body {
+    background: var(--c-white);
+    padding: 4rem 2rem 5rem;
+}
+
+.kap-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .kap-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+}
+
+/* ── Info oldal ── */
+.kap-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.kap-info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.kap-info-icon {
+    font-size: 1.2rem;
+    color: var(--c-border);
+    margin-bottom: 0.25rem;
+}
+
+.kap-info-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--c-dark);
+    font-weight: 700;
+}
+
+.kap-info-block p {
+    font-size: 0.9rem;
+    color: #5a3f6b;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+.kap-disclaimer {
+    background: var(--c-light);
+    border-left: 3px solid var(--c-border);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.1rem;
+    font-size: 0.82rem;
+    color: #5a3f6b;
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+.kap-disclaimer strong {
+    color: var(--c-dark);
+    font-weight: 500;
+}
+
+/* ── Űrlap ── */
+.kap-form-wrap {
+    background: var(--c-white);
+    border: 1.5px solid var(--c-border);
+    border-radius: 16px;
+    padding: 2.5rem;
+}
+
+@media (max-width: 500px) {
+    .kap-form-wrap { padding: 1.5rem; }
+}
+
+.kap-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.kap-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.kap-field label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--c-dark);
+    letter-spacing: 0.01em;
+}
+
+.kap-field label span {
+    color: var(--c-primary);
+    margin-left: 2px;
+}
+
+.kap-field input,
+.kap-field select,
+.kap-field textarea {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--c-text);
+    background: var(--c-white);
+    border: 1.5px solid var(--c-placeholder);
+    border-radius: 10px;
+    padding: 11px 14px;
+    outline: none;
+    transition: border-color 0.15s;
+    width: 100%;
+    resize: vertical;
+    font-weight: 300;
+}
+
+.kap-field input::placeholder,
+.kap-field textarea::placeholder {
+    color: #b49ec4;
+}
+
+.kap-field input:focus,
+.kap-field select:focus,
+.kap-field textarea:focus {
+    border-color: var(--c-primary);
+}
+
+.kap-field input:disabled,
+.kap-field select:disabled,
+.kap-field textarea:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.kap-field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23CE93D8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+.kap-error {
+    background: #fdf2f2;
+    border: 1px solid #f5c6c6;
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    font-size: 0.85rem;
+    color: #8b2020;
+    line-height: 1.5;
+}
+
+.kap-btn-primary {
+    background: var(--c-primary);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 13px 28px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s, opacity 0.15s;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 20px rgba(142, 36, 170, 0.2);
+    align-self: flex-start;
+}
+
+.kap-btn-primary:hover:not(:disabled) {
+    background: var(--c-dark);
+    transform: translateY(-2px);
+}
+
+.kap-btn-primary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ── Sikeres küldés ── */
+.kap-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    gap: 1rem;
+}
+
+.kap-success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--c-light);
+    border: 2px solid var(--c-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: var(--c-primary);
+    margin-bottom: 0.5rem;
+}
+
+.kap-success h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--c-dark);
+    font-weight: 700;
+}
+
+.kap-success p {
+    font-size: 0.95rem;
+    color: #5a3f6b;
+    line-height: 1.7;
+    font-weight: 300;
+    max-width: 360px;
+}
+
+.kap-btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--c-border);
+    color: var(--c-dark);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+}
+
+.kap-btn-outline:hover {
+    background: var(--c-light);
+}
