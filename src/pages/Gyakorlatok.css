@@ -207,7 +207,7 @@
     opacity: 0.40;
 }
 
-/* SVG átlátszó — látszik a háttérkép */
+/* SVG átlátszó - látszik a háttérkép */
 .body-shape {
     fill: transparent;
     stroke: transparent;

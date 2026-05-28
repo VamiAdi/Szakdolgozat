@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import "./Fooldal.css"
 
 
@@ -14,7 +14,7 @@ function Fooldal(){
                 </h1>
                 <div className="hero-divider"></div>
                 <p className="hero-sub">
-                    Nem egy általános fitneszprogramot kínálunk — célzott gyógytorna
+                    Nem egy általános fitneszprogramot kínálunk - célzott gyógytorna
                     gyakorlatokat a nappalijában, amelyek valóban működnek.
                 </p>
                 <button className="hero-btn" onClick={() => navigate("/gyakorlatok")}>

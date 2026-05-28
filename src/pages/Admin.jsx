@@ -30,7 +30,7 @@ const TIPUS_OPCIOK = [
     { id: "erosites", nev: "Erősítés" },
 ];
 
-/** Tábla edit — szerver rekord másolata űrlapmezőkhöz (kulcs = id). */
+/** Tábla edit - szerver rekord másolata űrlapmezőkhöz (kulcs = id). */
 function gySorAdatInicializalas(r) {
     return {
         gyakorlat_nev: r.gyakorlat_nev ?? "",
@@ -160,7 +160,7 @@ export default function Admin() {
         const p = sorPiszka[k] ?? (sor ? gySorAdatInicializalas(sor) : null);
         const numId = sor != null ? Number(sor.id) : Number(gyId);
         if (!p || !sor || !Number.isInteger(numId) || numId < 1) {
-            setHiba("A sor nem menthető — frissítse a listát, majd próbálja újra.");
+            setHiba("A sor nem menthető - frissítse a listát, majd próbálja újra.");
             return;
         }
         if (p.video_mod === "file" && sorVideoPending[k]) {
@@ -210,7 +210,7 @@ export default function Admin() {
         const sor = gyLista.find((x) => gyIdStr(x.id) === k);
         const numId = sor != null ? Number(sor.id) : Number(gyId);
         if (!sor || !Number.isInteger(numId) || numId < 1) {
-            setHiba("A sor nem törölhető — frissítse a listát, majd próbálja újra.");
+            setHiba("A sor nem törölhető - frissítse a listát, majd próbálja újra.");
             return;
         }
         if (
@@ -592,7 +592,7 @@ export default function Admin() {
                                     >
                                         {TESTRESZ_OPCIok.map((t) => (
                                             <option key={t.id} value={t.id}>
-                                                {t.id} — {t.nev} ({t.oldal})
+                                                {t.id} - {t.nev} ({t.oldal})
                                             </option>
                                         ))}
                                     </select>
@@ -761,7 +761,7 @@ export default function Admin() {
                                                     >
                                                         {TESTRESZ_OPCIok.map((t) => (
                                                             <option key={t.id} value={t.id}>
-                                                                {t.id} — {t.nev}
+                                                                {t.id} - {t.nev}
                                                             </option>
                                                         ))}
                                                     </select>
@@ -794,7 +794,7 @@ export default function Admin() {
                                                             piszkaMezoValt(r.id, "ismetlesszam", e.target.value)
                                                         }
                                                         disabled={zaroltEsEz}
-                                                        placeholder="—"
+                                                        placeholder="-"
                                                     />
                                                 </td>
                                                 <td className="cell-video">

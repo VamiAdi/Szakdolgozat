@@ -14,7 +14,7 @@ const faqs = [
     },
     {
         q: "Kell-e bármilyen eszköz a gyakorlatokhoz?",
-        a: "Programjaink nagy többsége teljesen eszközigény nélkül elvégezhető — csak egy kényelmes, sík felületre van szüksége. Néhány haladóbb gyakorlatnál javasolhatunk egy ellenállás szalagot vagy jógamatracot, de ezek mindig opcionálisak és feltüntetett helyettesítőkkel bírnak."
+        a: "Programjaink nagy többsége teljesen eszközigény nélkül elvégezhető - csak egy kényelmes, sík felületre van szüksége. Néhány haladóbb gyakorlatnál javasolhatunk egy ellenállás szalagot vagy jógamatracot, de ezek mindig opcionálisak és feltüntetett helyettesítőkkel bírnak."
     }
 ];
 
@@ -77,7 +77,7 @@ export default function HogyanMukodik() {
                     <div className="hm-safety-grid">
                         <div className="hm-safety-text">
                             <p>Bár a gyakorlatokat szakemberek állították össze, az otthoni torna során elengedhetetlen a felelősségteljes használat. Kérjük, ismerje meg azokat a jelzéseket, amelyek esetén a tornát azonnal abba kell hagyni, és szakorvost kell felkeresni.</p>
-                            <p>Programjaink fokozatosan épülnek fel — mindig a saját testének jelzéseire hallgatva haladjon, ne a program ütemezésére.</p>
+                            <p>Programjaink fokozatosan épülnek fel - mindig a saját testének jelzéseire hallgatva haladjon, ne a program ütemezésére.</p>
                         </div>
                         <div className="hm-safety-cards">
                             <div className="hm-safety-card">
@@ -93,7 +93,7 @@ export default function HogyanMukodik() {
                             <div className="hm-safety-card">
                                 <div className="hm-safety-card-icon">!</div>
                                 <h4>A „vészfék" szabály</h4>
-                                <p>Ha a gyakorlat közben éles, szúró fájdalmat érez — különösen ha a végtagokba sugárzik —, azonnal hagyja abba és pihenjen. Ez nem az „érzés", amit keresünk.</p>
+                                <p>Ha a gyakorlat közben éles, szúró fájdalmat érez - különösen ha a végtagokba sugárzik -, azonnal hagyja abba és pihenjen. Ez nem az „érzés", amit keresünk.</p>
                             </div>
                         </div>
                     </div>
@@ -141,7 +141,7 @@ export default function HogyanMukodik() {
                             <ExpertPortrait src={KATI_PORTRAIT} alt="Páli Katalin arckép" size="sm" />
                             <div className="hm-expert-info">
                                 <h4>Páli Katalin</h4>
-                                <p className="hm-expert-title">MSc Fizioterápia</p>
+                                <p className="hm-expert-title">MSc Humánkineziológia</p>
                                 <p className="hm-expert-focus">Budapesti Honvéd Sportegyesület gyógytornásza és a Testnevelési Egyetem óraadója. </p>
                             </div>
                         </div>
