@@ -1,0 +1,480 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+    --c-primary: #8E24AA;
+    --c-light: #F4EBFC;
+    --c-dark: #4A148C;
+    --c-text: #1E1326;
+    --c-white: #FFFFFF;
+    --c-border: #CE93D8;
+    --c-placeholder: #E1BEE7;
+    --c-teljes: #8E24AA;
+    --c-teljes-hatter: rgba(142, 36, 170, 0.18);
+    --c-reszleges: #E1BEE7;
+    --c-reszleges-hatter: rgba(206, 147, 216, 0.25);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+.pr-page {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--c-text);
+    min-height: calc(100vh - 75px);
+    background: var(--c-light);
+}
+
+/* ── Hero ── */
+.pr-hero {
+    background: #4A148C;
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.pr-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+}
+
+.pr-hero-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.pr-hero-szoveg {
+    flex: 1;
+}
+
+.pr-eyebrow {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-border);
+    margin-bottom: 0.25rem;
+}
+
+.pr-cim {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: #fff;
+    font-weight: 700;
+}
+
+.pr-adatok-gomb {
+    background: rgba(255,255,255,0.1);
+    border: 1.5px solid rgba(206,147,216,0.4);
+    color: var(--c-border);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 9px 18px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    margin-left: auto;
+}
+
+.pr-adatok-gomb:hover {
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+}
+
+.pr-vissza-gomb {
+    background: none;
+    border: none;
+    color: var(--c-border);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.15s;
+    flex-shrink: 0;
+}
+
+.pr-vissza-gomb:hover { color: #fff; }
+
+/* ── Tartalom ── */
+.pr-tartalom {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* ── Statisztikák ── */
+.pr-statisztikak {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+@media (max-width: 700px) {
+    .pr-statisztikak { grid-template-columns: repeat(2, 1fr); }
+}
+
+.pr-stat-kartya {
+    background: var(--c-white);
+    border: 1.5px solid var(--c-border);
+    border-radius: 14px;
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.pr-stat-kartya.kiemelve {
+    background: var(--c-light);
+    border-color: var(--c-primary);
+}
+
+.pr-stat-szam {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--c-dark);
+    line-height: 1;
+}
+
+.pr-stat-nev {
+    font-size: 0.8rem;
+    color: #7a5c8a;
+    font-weight: 400;
+}
+
+/* ── Naptár ── */
+.pr-naptar {
+    background: var(--c-white);
+    border: 1.5px solid var(--c-border);
+    border-radius: 16px;
+    padding: 2rem;
+}
+
+.pr-naptar-fejlec {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.pr-honap-cim {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--c-dark);
+    font-weight: 700;
+}
+
+.pr-nav-gomb {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px solid var(--c-border);
+    background: none;
+    font-size: 1.1rem;
+    color: var(--c-dark);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+    line-height: 1;
+}
+
+.pr-nav-gomb:hover:not(.letiltva) { background: var(--c-light); }
+.pr-nav-gomb.letiltva {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.pr-naptar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 1.5rem;
+}
+
+.pr-nap-nev {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #9c7aad;
+    padding: 6px 0;
+    letter-spacing: 0.04em;
+}
+
+.pr-nap-cella {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    position: relative;
+    transition: background 0.15s;
+}
+
+.pr-nap-cella.ures { background: transparent; }
+
+.pr-nap-cella.jovobeli .pr-nap-szam { color: #d4c0de; }
+
+.pr-nap-cella.teljes {
+    background: var(--c-teljes-hatter);
+}
+
+.pr-nap-cella.teljes .pr-nap-szam {
+    color: var(--c-dark);
+    font-weight: 600;
+}
+
+.pr-nap-cella.teljes::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--c-teljes);
+    z-index: 0;
+}
+
+.pr-nap-cella.teljes .pr-nap-szam {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+}
+
+.pr-nap-cella.reszleges {
+    background: var(--c-reszleges-hatter);
+}
+
+.pr-nap-cella.reszleges::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--c-reszleges);
+    z-index: 0;
+}
+
+.pr-nap-cella.reszleges .pr-nap-szam {
+    position: relative;
+    z-index: 1;
+    color: var(--c-dark);
+    font-weight: 500;
+}
+
+.pr-nap-cella.ma:not(.teljes):not(.reszleges) {
+    border: 2px solid var(--c-primary);
+}
+
+.pr-nap-cella.ma.teljes::after,
+.pr-nap-cella.ma.reszleges::after {
+    border: 2px solid var(--c-dark);
+}
+
+.pr-nap-szam {
+    font-size: 0.82rem;
+    color: var(--c-text);
+    user-select: none;
+}
+
+/* ── Jelmagyarázat ── */
+.pr-jelmagyjarat {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.pr-jelm-elem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    color: #7a5c8a;
+}
+
+.pr-jelm-szin {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.pr-jelm-szin.teljes   { background: var(--c-teljes); }
+.pr-jelm-szin.reszleges { background: var(--c-reszleges); border: 1px solid var(--c-border); }
+
+.pr-honap-stat {
+    font-size: 0.85rem;
+    color: #7a5c8a;
+    font-weight: 300;
+}
+
+.pr-honap-stat strong {
+    color: var(--c-dark);
+    font-weight: 500;
+}
+
+/* ── Adatok oldal ── */
+.pr-adatok-tartalom {
+    max-width: 600px;
+}
+
+.pr-szekció-doboz {
+    background: var(--c-white);
+    border: 1.5px solid var(--c-border);
+    border-radius: 16px;
+    padding: 2rem;
+}
+
+.pr-szekció-cim {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--c-dark);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--c-placeholder);
+}
+
+.pr-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.pr-mezo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.pr-mezo label {
+    font-size: 0.83rem;
+    font-weight: 500;
+    color: var(--c-dark);
+}
+
+.pr-mezo input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--c-text);
+    background: var(--c-white);
+    border: 1.5px solid var(--c-placeholder);
+    border-radius: 10px;
+    padding: 11px 14px;
+    outline: none;
+    transition: border-color 0.15s;
+    font-weight: 300;
+}
+
+.pr-mezo input:focus { border-color: var(--c-primary); }
+.pr-mezo input:disabled { opacity: 0.6; }
+
+.pr-mezo-hiba {
+    font-size: 0.78rem;
+    color: #c62828;
+}
+
+.pr-hiba {
+    background: #fdf2f2;
+    border: 1px solid #f5c6c6;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    color: #8b2020;
+}
+
+.pr-siker {
+    background: #f1f8f1;
+    border: 1px solid #a5d6a7;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    color: #2e7d32;
+}
+
+.pr-btn {
+    background: var(--c-primary);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 12px 28px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    align-self: flex-start;
+    box-shadow: 0 4px 16px rgba(142,36,170,0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pr-btn:hover:not(:disabled) {
+    background: var(--c-dark);
+    transform: translateY(-1px);
+}
+
+.pr-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.pr-spinner {
+    width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: pr-spin 0.8s linear infinite;
+    display: inline-block;
+}
+
+@keyframes pr-spin { to { transform: rotate(360deg); } }
+
+/* ── Veszélyes zóna ── */
+.pr-veszelyes {
+    border-color: #f5c6c6;
+    background: #fff;
+}
+
+.pr-veszelyes p {
+    font-size: 0.88rem;
+    color: #7a5c8a;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+}
+
+.pr-veszelyes-cim {
+    color: #c62828 !important;
+    border-color: #f5c6c6 !important;
+}
+
+.pr-btn-torles {
+    background: transparent;
+    border: 1.5px solid #e57373;
+    color: #c62828;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 9px 22px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.pr-btn-torles:hover {
+    background: #fdf2f2;
+}

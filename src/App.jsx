@@ -1,35 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    useLocation,
+} from "react-router-dom";
+import ScrollToTop from "./ScrollToTop";
+import NavBar from "./NavBar";
+import Fooldal from "./pages/Fooldal"
+import Gyakorlatok from "./pages/Gyakorlatok";
+import HogyanMukodik from "./pages/HogyanMukodik";
+import Rolunk from "./pages/Rolunk";
+import Belepes from "./pages/Belepes";
+import Profil from "./pages/Profil";
+import Kapcsolat from "./pages/Kapcsolat";
+import Footer from "./Footer";
+import ProfilAdatok from "./pages/ProfilAdatok";
+import VedettUt from "./VedettUt";
+import Admin from "./pages/Admin";
+import NotFound from "./pages/NotFound";
+
+
+function Utak() {
+    const { pathname } = useLocation();
+    const adminOldal = pathname.startsWith("/admin");
+
+    return (
+        <>
+            {!adminOldal && <NavBar />}
+            <Routes>
+                <Route path="/" element={<Fooldal />} />
+                <Route path="/gyakorlatok" element={<Gyakorlatok />} />
+                <Route path="/hogyan_mukodik" element={<HogyanMukodik />} />
+                <Route path="/rolunk" element={<Rolunk />} />
+                <Route path="/belepes" element={<Belepes />} />
+                <Route path="/profil" element={<VedettUt><Profil /></VedettUt>} />
+                <Route path="/kapcsolat" element={<Kapcsolat />} />
+                <Route path="/profil/adatok" element={<VedettUt><ProfilAdatok /></VedettUt>} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+            {!adminOldal && <Footer />}
+        </>
+    );
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+    return (
+        <Router>
+            <ScrollToTop />
+            <Utak />
+        </Router>
+    );
+/*return (
+      <>
+          <h1>
+            Hello to my Szakdolgozat!
+          </h1>
+          <p>
+            Itt remélhetőleg valami mesés fog félév végén állni
+          </p>
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count} + 0
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      </>
+  )*/
 }
 
 export default App
