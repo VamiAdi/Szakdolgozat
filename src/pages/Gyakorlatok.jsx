@@ -3,17 +3,17 @@ import { authedFetch, apiUrl, useAuth, getUser } from "../auth";
 import "./Gyakorlatok.css";
 
 const TESTRESZEK = [
-    { id: "6",  nev: "Vállak",              front: true,  cx: 100, cy: 98  },
+    { id: "6",  nev: "Vállak",              front: true,  cx: 65, cy: 88  },
     { id: "5",  nev: "Has",                 front: true,  cx: 100, cy: 158 },
-    { id: "4",  nev: "Csípő",               front: true,  cx: 100, cy: 190 },
-    { id: "3",  nev: "Comb",                front: true,  cx: 100, cy: 230 },
-    { id: "2",  nev: "Térd",                front: true,  cx: 100, cy: 268 },
-    { id: "1",  nev: "Boka",                front: true,  cx: 100, cy: 350 },
-    { id: "11", nev: "Nyak",                front: false, cx: 100, cy: 68  },
-    { id: "10", nev: "Felső hát / lapocka", front: false, cx: 100, cy: 120 },
-    { id: "9",  nev: "Alsó hát / derék",    front: false, cx: 100, cy: 175 },
-    { id: "8",  nev: "Fartájék",            front: false, cx: 100, cy: 210 },
-    { id: "7",  nev: "Combhajlító",         front: false, cx: 100, cy: 255 },
+    { id: "4",  nev: "Csípő",               front: true,  cx: 125, cy: 190 },
+    { id: "3",  nev: "Comb",                front: true,  cx: 80, cy: 230 },
+    { id: "2",  nev: "Térd",                front: true,  cx: 118, cy: 270 },
+    { id: "1",  nev: "Boka",                front: true,  cx: 88, cy: 335 },
+    { id: "11", nev: "Nyak",                front: false, cx: 100, cy: 57  },
+    { id: "10", nev: "Felső hát / lapocka", front: false, cx: 100, cy: 110 },
+    { id: "9",  nev: "Alsó hát / derék",    front: false, cx: 100, cy: 155 },
+    { id: "8",  nev: "Fartájék",            front: false, cx: 120, cy: 190 },
+    { id: "7",  nev: "Combhajlító",         front: false, cx: 82, cy: 240 },
 ];
 
 const PROGRAM_OSSZEHIBA = "Sajnáljuk, a program most nem állítható össze. Próbálja újra később.";
@@ -40,13 +40,9 @@ const PROGRAMTIPUSOK = [
     },
 ];
 
-/** Egyes gyakorlatok `tipus` mezője (adatbázis-kulcs → megjelenített név). */
 const GYAKORLAT_TIPUS_CIMKE = {
     nyujtas: "Nyújtás",
     erosites: "Erősítés",
-    // mobilizalas: "Mobilizálás",
-    // aktivalas: "Aktiválás",
-    // stabilizalas: "Stabilizálás",
 };
 
 function gyakorlatTipusCimke(tipus) {
@@ -55,27 +51,31 @@ function gyakorlatTipusCimke(tipus) {
     return GYAKORLAT_TIPUS_CIMKE[k] ?? tipus;
 }
 
+import VideoEmbed from "../components/VideoEmbed";
+
+function GyakorlatMedia({ videoLink }) {
+    const hasVideo = videoLink != null && String(videoLink).trim() !== "";
+
+    return (
+        <div className={`gy-pl-video ${hasVideo ? "gy-pl-video--has-video" : ""}`}>
+            {hasVideo ? (
+                <div
+                    className="gy-pl-video-inner"
+                    onClick={(e) => e.preventDefault()}
+                    onKeyDown={(e) => e.stopPropagation()}
+                >
+                    <VideoEmbed videoLink={videoLink} className="gy-pl-video-elem" />
+                </div>
+            ) : null}
+        </div>
+    );
+}
+
 function BodySVG({ view, kivalasztott, onKattint }) {
     const testreszek = TESTRESZEK.filter(t => t.front === (view === "front"));
 
     return (
         <svg viewBox="0 0 200 370" className="body-svg" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="100" cy="38" rx="22" ry="26" className="body-shape" />
-            <rect x="92" y="62" width="16" height="13" rx="4" className="body-shape" />
-            <path d="M68 75 Q58 80 55 100 L52 192 Q52 200 62 200 L138 200 Q148 200 148 192 L145 100 Q142 80 132 75 Z" className="body-shape" />
-            <path d="M68 80 Q52 86 46 112 L43 168 Q41 177 48 179 L59 179 Q65 177 65 168 L67 118 Z" className="body-shape" />
-            <path d="M132 80 Q148 86 154 112 L157 168 Q159 177 152 179 L141 179 Q135 177 135 168 L133 118 Z" className="body-shape" />
-            <path d="M43 171 L39 228 Q38 236 45 238 L55 238 Q61 236 61 228 L59 171 Z" className="body-shape" />
-            <path d="M157 171 L161 228 Q162 236 155 238 L145 238 Q139 236 139 228 L141 171 Z" className="body-shape" />
-            <ellipse cx="46" cy="244" rx="8" ry="10" className="body-shape" />
-            <ellipse cx="154" cy="244" rx="8" ry="10" className="body-shape" />
-            <path d="M63 198 L59 272 Q58 280 65 282 L80 282 Q87 280 86 272 L84 198 Z" className="body-shape" />
-            <path d="M137 198 L141 272 Q142 280 135 282 L120 282 Q113 280 114 272 L116 198 Z" className="body-shape" />
-            <path d="M59 274 L56 332 Q55 340 62 342 L77 342 Q84 340 83 332 L81 274 Z" className="body-shape" />
-            <path d="M141 274 L144 332 Q145 340 138 342 L123 342 Q116 340 117 332 L119 274 Z" className="body-shape" />
-            <ellipse cx="69" cy="348" rx="14" ry="8" className="body-shape" />
-            <ellipse cx="131" cy="348" rx="14" ry="8" className="body-shape" />
-
             {testreszek.map(t => (
                 <g key={t.id} onClick={() => onKattint(t.id)} className="body-zone">
                     <circle
@@ -104,13 +104,11 @@ export default function Gyakorlatok() {
 
     const [kivalasztott, setKivalasztott] = useState([]);
     const [programTipus, setProgramTipus] = useState(null);
-    // allapot: 'betoltes' | 'valasztas' | 'feldolgozas' | 'eredmeny'
     const [allapot, setAllapot] = useState(() => (getUser() ? "betoltes" : "valasztas"));
     const [apiHiba, setApiHiba] = useState("");
     const [napiSor, setNapiSor] = useState([]);
     const [aktivProgram, setAktivProgram] = useState(null);
 
-    // Belépés / oldalbetöltés után: ha van program, töltsük be a mai napi sort és menjünk az eredmény nézetre.
     useEffect(() => {
         let cancelled = false;
         (async () => {
@@ -140,10 +138,8 @@ export default function Gyakorlatok() {
                 if (!cancelled) setAllapot("valasztas");
             }
         })();
-        return () => {
-            cancelled = true;
-        };
-    }, [user?.sub]);
+        return () => { cancelled = true; };
+    }, [user]);
 
     const toggleTestresz = (id) => {
         setKivalasztott(prev =>
@@ -179,8 +175,7 @@ export default function Gyakorlatok() {
                     setAllapot("valasztas");
                     return;
                 }
-                const sor = Array.isArray(data.napiSor) ? data.napiSor : [];
-                setNapiSor(sor);
+                setNapiSor(Array.isArray(data.napiSor) ? data.napiSor : []);
                 setAktivProgram({ testreszek: [...kivalasztott], program_tipus: programTipus });
                 setAllapot("eredmeny");
                 return;
@@ -224,7 +219,6 @@ export default function Gyakorlatok() {
 
     const handleElvegezveValtas = async (napiId, ujErtek) => {
         if (napiId == null) return;
-        // Optimista frissítés
         setNapiSor(prev => prev.map(g => (g.id === napiId ? { ...g, elvegezve: ujErtek } : g)));
         try {
             const res = await authedFetch(apiUrl(`/api/napi-gyakorlat/${napiId}`), {
@@ -323,11 +317,7 @@ export default function Gyakorlatok() {
                                         className={`gy-gyakorlat-kartya gy-kartya-belepve ${gyakorlat.elvegezve ? "kesz" : ""}`}
                                     >
                                         <div className="gy-pl-szam">{String(index + 1).padStart(2, "0")}</div>
-                                        <div className="gy-pl-video">
-                                            {gyakorlat.video_link && (
-                                                <video src={gyakorlat.video_link} controls width="100%" />
-                                            )}
-                                        </div>
+                                        <GyakorlatMedia videoLink={gyakorlat.video_link} />
                                         <div className="gy-pl-info">
                                             <h3>{gyakorlat.gyakorlat_nev || "Gyakorlat"}</h3>
                                             <p>{gyakorlat.leiras}</p>
@@ -361,11 +351,7 @@ export default function Gyakorlatok() {
                                         className="gy-gyakorlat-kartya gy-vendeg"
                                     >
                                         <div className="gy-pl-szam">{String(index + 1).padStart(2, "0")}</div>
-                                        <div className="gy-pl-video">
-                                            {gyakorlat.video_link && (
-                                                <video src={gyakorlat.video_link} controls width="100%" />
-                                            )}
-                                        </div>
+                                        <GyakorlatMedia videoLink={gyakorlat.video_link} />
                                         <div className="gy-pl-info">
                                             <h3>{gyakorlat.gyakorlat_nev || "Gyakorlat"}</h3>
                                             <p>{gyakorlat.leiras}</p>
@@ -401,6 +387,7 @@ export default function Gyakorlatok() {
                 <p className="gy-sub">Jelölje be a fájdalmas testrész(ek)et, válasszon programtípust, és mi összeállítjuk az Önre szabott gyakorlatsort.</p>
             </section>
 
+            {/* 1. lépés: Testtérkép */}
             <section className="gy-step">
                 <div className="gy-step-fejlec">
                     <div className="gy-step-num">1</div>
@@ -413,11 +400,36 @@ export default function Gyakorlatok() {
                 <div className="gy-ket-test">
                     <div className="gy-test-oldal">
                         <p className="gy-test-label">Előlnézet</p>
-                        <BodySVG view="front" kivalasztott={kivalasztott} onKattint={toggleTestresz} />
+                        <div className="body-svg-wrap">
+                            <img
+                                src="human-body-front.jpg"
+                                alt=""
+                                className="body-svg-hatter"
+                                draggable="false"
+                            />
+                            <BodySVG
+                                view="front"
+                                kivalasztott={kivalasztott}
+                                onKattint={toggleTestresz}
+                            />
+                        </div>
                     </div>
+
                     <div className="gy-test-oldal">
                         <p className="gy-test-label">Hátulnézet</p>
-                        <BodySVG view="back" kivalasztott={kivalasztott} onKattint={toggleTestresz} />
+                        <div className="body-svg-wrap">
+                            <img
+                                src="/human-body-back.jpg"
+                                alt=""
+                                className="body-svg-hatter"
+                                draggable="false"
+                            />
+                            <BodySVG
+                                view="back"
+                                kivalasztott={kivalasztott}
+                                onKattint={toggleTestresz}
+                            />
+                        </div>
                     </div>
                 </div>
 
@@ -433,6 +445,7 @@ export default function Gyakorlatok() {
                 )}
             </section>
 
+            {/* 2. lépés: Program típusa */}
             <section className="gy-step gy-step-alt">
                 <div className="gy-step-fejlec">
                     <div className="gy-step-num">2</div>
@@ -458,6 +471,7 @@ export default function Gyakorlatok() {
                 </div>
             </section>
 
+            {/* 3. lépés: Beküldés */}
             <section className="gy-step gy-step-cta">
                 <div className="gy-step-fejlec">
                     <div className={`gy-step-num ${!bekuldhet ? "szurke" : ""}`}>3</div>
@@ -477,9 +491,7 @@ export default function Gyakorlatok() {
                 </div>
 
                 {apiHiba && (
-                    <p className="gy-api-hiba" role="alert">
-                        {apiHiba}
-                    </p>
+                    <p className="gy-api-hiba" role="alert">{apiHiba}</p>
                 )}
 
                 <button

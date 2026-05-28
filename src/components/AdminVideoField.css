@@ -1,0 +1,158 @@
+.admin-video-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.admin-video-field--compact {
+    gap: 0.45rem;
+    min-width: 11rem;
+}
+
+.admin-video-mod {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 3px;
+    border-radius: 9px;
+    background: #f3edf8;
+    border: 1px solid #e4d8ef;
+    gap: 2px;
+}
+
+.admin-video-mod-btn {
+    border: none;
+    background: transparent;
+    color: #6b4190;
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 0.28rem 0.62rem;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.admin-video-mod-btn:hover:not(:disabled) {
+    color: #402652;
+}
+
+.admin-video-mod-btn.aktiv {
+    background: #fff;
+    color: #402652;
+    box-shadow: 0 1px 4px rgba(91, 55, 120, 0.14);
+}
+
+.admin-video-mod-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.admin-video-input {
+    margin: 0;
+}
+
+.admin-video-feltoltes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.admin-video-fajl-rejtett {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.admin-video-fajl-label {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.82rem;
+    cursor: pointer;
+}
+
+.admin-video-fajl-label.szurke {
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.admin-video-fajlnev {
+    flex: 1;
+    min-width: 6rem;
+    font-size: 0.8rem;
+    color: #5b4570;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-video-feltolt-btn {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.82rem;
+}
+
+.admin-video-help {
+    margin: 0;
+}
+
+.admin-video-hiba {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #7a2940;
+    background: #fdeef0;
+    border-radius: 8px;
+    padding: 0.4rem 0.55rem;
+}
+
+.admin-video-elonezet {
+    width: 100%;
+    max-width: min(100%, 480px);
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #1a1024;
+    border: 1px solid #dfd3eb;
+}
+
+.admin-video-field--compact .admin-video-elonezet {
+    max-width: 100%;
+}
+
+.admin-video-elonezet-elem {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+    border: 0;
+}
+
+.admin-video-field--compact .admin-video-feltoltes {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.admin-video-field--compact .admin-video-fajl-label,
+.admin-video-field--compact .admin-video-feltolt-btn {
+    width: 100%;
+    justify-content: center;
+}
+
+.admin-video-field--compact .admin-video-fajlnev {
+    text-align: center;
+}
+
+.admin-tbl .admin-video-field .admin-input,
+.admin-tbl .admin-video-field .admin-select {
+    font-size: 0.82rem;
+    padding: 0.38rem 0.45rem;
+}
+
+.admin-tbl .cell-video {
+    min-width: 22rem;
+}

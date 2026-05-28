@@ -4,20 +4,12 @@ const express = require('express')
 const app = express()
 const port = 3001
 
-/**
- * backend/.env (ne commitold):
- *   KEYCLOAK_URL=http://localhost:8080
- *   KEYCLOAK_REALM=rehabology
- *   KEYCLOAK_CLIENT_ID=rehabology-frontend
- *   KEYCLOAK_ADMIN_USER=admin
- *   KEYCLOAK_ADMIN_PASSWORD=admin
- */
-
 const { requireAuth, requireAdmin, jwtPayloadFromAccessToken, felhasznaloVanRealmAdminJoga } = require('./authMiddleware')
 const programModel = require('./programModel')
 const napiModel = require('./napiGyakorlatModel')
 const gyakorlatAdminModel = require('./gyakorlatAdminModel')
 const { importGyakorlatCsv } = require('./gyakorlatCsvImport')
+const { uploadVideoMiddleware } = require('./videoUpload')
 
 const KEYCLOAK_URL = process.env.KEYCLOAK_URL || 'http://localhost:8080'
 const KEYCLOAK_REALM = process.env.KEYCLOAK_REALM || 'rehabology'
@@ -219,6 +211,18 @@ app.post('/api/admin/belepes', async (req, res) => {
     console.error('/api/admin/belepes:', e.message)
     return res.status(401).json({ message: 'Hibás felhasználónév vagy jelszó.' })
   }
+})
+
+/** Videó feltöltése a public/ mappába (admin). */
+app.post('/api/admin/videok/feltoltes', requireAdmin, uploadVideoMiddleware, (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ message: 'Válasszon ki egy videófájlt.' })
+  }
+  return res.status(201).json({
+    ok: true,
+    filename: req.file.filename,
+    url: `/${req.file.filename}`,
+  })
 })
 
 /** Gyakorlatok listázása (admin konsol). */

@@ -1,24 +1,7 @@
-// function HogyanMukodik(){
-//     return (
-//         // <div>
-//         //     Hogyan működik
-//         // </div>
-//         <>
-//             <div className="bevezeto">
-//                 <h1>Nem csak torna - precízen felépített rehabilitáció</h1>
-//                 <h3>Értse meg, mi történik a testében, és miért pont ezek a gyakorlatok hozzák el a hosszú távú enyhülést.</h3>
-//                 <p>Az irodai munka okozta panaszok nem egyik napról a másikra alakulnak ki. A hosszútávú ülés problémáira is adunk megoldást.  Módszertanunk a modern fizioterápia alapelveire épül</p>
-//             </div>
-//         </>
-//     );
-// }
-
-// export default HogyanMukodik
-
-
 import { useNavigate } from "react-router-dom";
 import "./HogyanMukodik.css";
 import { useState } from "react";
+import ExpertPortrait, { KATI_PORTRAIT, TOZSER_ANITA_PORTRAIT } from "../components/ExpertPortrait";
 
 const faqs = [
     {
@@ -83,7 +66,7 @@ export default function HogyanMukodik() {
                             <p>Megerősítjük az ízületek körüli tartóizmokat. Ez a fázis építi fel azt a „páncélt", amely megvédi Önt a jövőbeli panaszoktól.</p>
                         </div>
                     </div>
-                    <p className="hm-pillars-closing">Minden programunk ezt a háromlépcsős logikai ívet követi a tartós eredményért.</p>
+                    <p className="hm-pillars-closing">Komplex programunk ezt a háromlépcsős logikai ívet követi a tartós eredményért.</p>
                 </div>
             </section>
 
@@ -114,7 +97,7 @@ export default function HogyanMukodik() {
                             </div>
                         </div>
                     </div>
-                    <button className="hm-btn-outline"> 
+                    <button className="hm-btn-outline">
                         <a className="hm-link-to-faq" href="#hm-faq">
                             Gyakori kérdések a biztonságról →
                         </a>
@@ -155,23 +138,22 @@ export default function HogyanMukodik() {
                     <h2 className="hm-section-title hm-title-dark">Ki garantálja a szakmaiságot?</h2>
                     <div className="hm-experts-grid">
                         <div className="hm-expert-card">
-                            <div className="hm-expert-photo"></div>
+                            <ExpertPortrait src={KATI_PORTRAIT} alt="Páli Katalin arckép" size="sm" />
                             <div className="hm-expert-info">
-                                <h4>Dr. Németh Katalin</h4>
-                                <p className="hm-expert-title">MSc Fizioterápia, 12 év klinikai tapasztalat</p>
-                                <p className="hm-expert-focus">Fókusz: gerinc rehabilitáció és munkahelyi ergonómia</p>
+                                <h4>Páli Katalin</h4>
+                                <p className="hm-expert-title">MSc Fizioterápia</p>
+                                <p className="hm-expert-focus">Budapesti Honvéd Sportegyesület gyógytornásza és a Testnevelési Egyetem óraadója. </p>
                             </div>
                         </div>
                         <div className="hm-expert-card">
-                            <div className="hm-expert-photo"></div>
+                            <ExpertPortrait src={TOZSER_ANITA_PORTRAIT} alt="Tőzsér Anita arckép" size="sm" />
                             <div className="hm-expert-info">
-                                <h4>Horváth Bence</h4>
-                                <p className="hm-expert-title">Gyógytornász, sportrehabilitációs szakember</p>
-                                <p className="hm-expert-focus">Fókusz: funkcionális mozgás és megelőzés</p>
+                                <h4>Tőzsér Anita</h4>
+                                <p className="hm-expert-title">MSc Fizioterápia, ötletgazda</p>
+                                <p className="hm-expert-focus">Debreceni Egyetemi Atlétikai Club gyógytornásza.</p>
                             </div>
                         </div>
                     </div>
-                    <p className="hm-experts-closing">Gyakorlataink az <strong>Evidence Based Medicine</strong> nemzetközi irányelveit követik.</p>
                 </div>
             </section>
 
@@ -187,7 +169,7 @@ export default function HogyanMukodik() {
                                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                                 >
                                     <span>{item.q}</span>
-                                    <span className="hm-faq-toggle">{openFaq === i ? "-" : "+"}</span>  
+                                    <span className="hm-faq-toggle">{openFaq === i ? "-" : "+"}</span>
                                 </button>
                                 {openFaq === i && (
                                     <div className="hm-faq-a">{item.a}</div>

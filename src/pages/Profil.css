@@ -51,22 +51,6 @@
     z-index: 1;
 }
 
-/* .pr-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: var(--c-primary);
-    border: 2px solid var(--c-border);
-    color: #fff;
-    font-size: 1.4rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Playfair Display', serif;
-    flex-shrink: 0;
-} */
-
 .pr-hero-szoveg {
     flex: 1;
 }

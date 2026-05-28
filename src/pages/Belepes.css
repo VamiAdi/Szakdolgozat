@@ -346,18 +346,3 @@
     text-underline-offset: 2px;
     font-weight: 500;
 }
-
-/* ── ÁSZF info ── */
-.bp-aszf-info {
-    font-size: 0.78rem;
-    color: #9c7aad;
-    line-height: 1.6;
-    font-weight: 300;
-    text-align: center;
-}
-
-.bp-aszf-info a {
-    color: var(--c-primary);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}

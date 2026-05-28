@@ -58,18 +58,12 @@ export function getUser() {
     };
 }
 
-export function isLoggedIn() {
-    return !!getUser();
-}
-
-/** Csak dekódol (nincs aláírás-ellenőrzés) — lejárat / claim olvasáshoz. */
 export function jwtPayloadDecoded(token) {
     return decodeJwtBase64(token);
 }
 
 export function teljesNevMegjelenites(user) {
     if (!user) return "";
-    // Keycloak (adatlap): family_name után given_name következik
     const sor = [user.lastName, user.firstName].filter(Boolean).join(" ").trim();
     if (sor) return sor;
     const fallback = (user.name || "").trim();
@@ -102,7 +96,7 @@ export function tokenekMentese(tokenAdatok) {
     window.dispatchEvent(new Event("auth-change"));
 }
 
-export function kiletkeztet() {
+export function kijelentkeztet() {
     sessionStorage.removeItem(ACCESS);
     sessionStorage.removeItem(REFRESH);
     sessionStorage.removeItem(ID);
@@ -157,12 +151,12 @@ export async function sessionFrissiteseHaKell() {
     if (!lejartVagyKozel) return;
 
     if (!refresh) {
-        kiletkeztet();
+        kijelentkeztet();
         return;
     }
 
     const ok = await keycloakRefreshAccessToken(refresh).catch(() => false);
-    if (!ok) kiletkeztet();
+    if (!ok) kijelentkeztet();
 }
 
 let refreshTimer = null;

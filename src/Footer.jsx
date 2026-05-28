@@ -21,11 +21,7 @@ export default function Footer() {
                 </nav>
 
                 <div className="footer-bottom">
-                    <span>© {ev} Rehabology. Minden jog fenntartva.</span>
-                    <div className="footer-legal">
-                        <NavLink to="/adatvedelem">Adatvédelem</NavLink>
-                        <NavLink to="/aszf">ÁSZF</NavLink>
-                    </div>
+                    <span>{ev} Rehabology.</span>
                 </div>
 
             </div>

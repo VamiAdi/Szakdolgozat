@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth, kiletkeztet } from "./auth";
+import { useAuth, kijelentkeztet } from "./auth";
 import './App.css';
 
 
@@ -8,7 +8,7 @@ function NavBar() {
     const navigate = useNavigate();
 
     const handleKilepes = () => {
-        kiletkeztet();
+        kijelentkeztet();
         navigate("/", { replace: true });
     };
 

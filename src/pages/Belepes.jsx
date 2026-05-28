@@ -11,31 +11,6 @@ function celUtBelepUtan(locationState) {
     return "/gyakorlatok";
 }
 
-// ─────────────────────────────────────────────────────────────────
-// KEYCLOAK KONFIGURÁCIÓ
-//
-// Telepítés: npm install keycloak-js
-//
-// Töltsd ki az alábbi értékeket a Keycloak admin felületéről:
-//   1. Nyisd meg: http://[KEYCLOAK_URL]/admin
-//   2. Válaszd ki a realm-et (vagy hozz létre egyet)
-//   3. Clients → Create client → Client ID: rehabology-frontend
-//   4. Az alábbi értékeket innen másolod ki
-//
-// .env (projekt gyökér, frontend):
-//   VITE_KEYCLOAK_URL=http://localhost:8080
-//   VITE_KEYCLOAK_REALM=rehabology
-//   VITE_KEYCLOAK_CLIENT_ID=rehabology-frontend
-//   VITE_API_URL=http://localhost:3001
-//
-// Hosszabb munkamenet: Keycloak Admin → Realm settings → Tokens:
-//   - Access token lifespan (pl. 15–30 perc), Refresh token max lifespan (óra / nap).
-//   A kliens a refresh tokent használja (auth.js → sessionFrissiteseHaKell).
-//
-// Keycloak admin felhasználó/jelszó: backend/.env (lásd backend/index.js) — ne VITE_* !
-// ─────────────────────────────────────────────────────────────────
-
-// Felhasználónak látható üzenetek — technikai részlet (Keycloak, .env, stb.) csak console-ba
 const UGYFEL_BELEPES_HIBA = "Hibás e-mail vagy jelszó.";
 const UGYFEL_HALOZAT_HIBA = "Nem sikerült kapcsolódni. Próbálja újra.";
 const UGYFEL_REG_ALTALANOS = "A regisztráció nem sikerült. Próbálja újra.";
@@ -58,7 +33,7 @@ function halozatiHibaUzenet(err) {
 }
 
 // Keycloak Direct Grant (Resource Owner Password) hívás
-// Ez teszi lehetővé az email+jelszó belépést a saját UI-unkról.
+// Ez teszi lehetővé az email+jelszó belépést a saját UI-ról.
 // Keycloak admin-ban be kell kapcsolni:
 //   Clients → rehabology-frontend → Settings → Direct access grants: ON
 async function keycloakLogin(email, jelszo) {
@@ -81,20 +56,12 @@ async function keycloakLogin(email, jelszo) {
     });
 
     if (!response.ok) {
-        try {
-            const raw = await response.json();
-            if (import.meta.env.DEV) console.debug("[dev] Belépés válasz:", raw);
-        } catch {
-            /* üres */
-        }
         throw new Error("login_failed");
     }
 
     return await response.json();
-    // Visszaad: { access_token, refresh_token, id_token, expires_in, ... }
 }
 
-// Regisztráció a Node backenden fut (CORS + admin titok). Indítsd: backend → node index.js
 async function apiRegisztracio(firstName, lastName, email, jelszo) {
     const base = import.meta.env.VITE_API_URL || "http://localhost:3001";
     const res = await fetch(`${base}/api/regisztracio`, {
@@ -116,12 +83,7 @@ async function apiRegisztracio(firstName, lastName, email, jelszo) {
     return adat;
 }
 
-// Token mentése a központi auth helperen át (értesít minden komponenst).
 const tokenMentes = tokenekMentese;
-
-// ─────────────────────────────────────────────────────────────────
-// UI KOMPONENS
-// ─────────────────────────────────────────────────────────────────
 
 export default function Belepes() {
     const navigate = useNavigate();
@@ -210,18 +172,34 @@ export default function Belepes() {
             <div className="bp-keret">
 
                 {/* Bal panel – branding */}
-                <div className="bp-bal">
-                    <div className="bp-bal-tartalom">
-                        <div className="bp-logo">Rehab<span>ology</span></div>
-                        <h2>Üdvözöljük vissza.</h2>
-                        <p>Folytassa személyre szabott rehabilitációs programját, és tegyen egy lépést az egészségesebb élet felé.</p>
-                        <div className="bp-bal-diszek">
-                            <div className="bp-diszko">〜</div>
-                            <div className="bp-diszko">◈</div>
-                            <div className="bp-diszko">◎</div>
+                {nezet === "belepes" && (
+                    <div className="bp-bal">
+                        <div className="bp-bal-tartalom">
+                            <div className="bp-logo">Rehab<span>ology</span></div>
+                            <h2>Üdvözöljük vissza.</h2>
+                            <p>Folytassa személyre szabott rehabilitációs programját, és tegyen egy lépést az egészségesebb élet felé.</p>
+                            <div className="bp-bal-diszek">
+                                <div className="bp-diszko">〜</div>
+                                <div className="bp-diszko">◈</div>
+                                <div className="bp-diszko">◎</div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
+                {nezet === "regisztracio" && (
+                    <div className="bp-bal">
+                        <div className="bp-bal-tartalom">
+                            <div className="bp-logo">Rehab<span>ology</span></div>
+                            <h2>Üdvözöljük.</h2>
+                            <p>Készítse el személyre szabott rehabilitációs programját, és tegyen egy lépést az egészségesebb élet felé.</p>
+                            <div className="bp-bal-diszek">
+                                <div className="bp-diszko">〜</div>
+                                <div className="bp-diszko">◈</div>
+                                <div className="bp-diszko">◎</div>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Jobb panel – űrlap */}
                 <div className="bp-jobb">
@@ -382,12 +360,6 @@ export default function Belepes() {
                                 </div>
 
                                 {hiba && <div className="bp-hiba">{hiba}</div>}
-
-                                <p className="bp-aszf-info">
-                                    A regisztrációval elfogadja az{" "}
-                                    <a href="/aszf" target="_blank">ÁSZF</a>-et és az{" "}
-                                    <a href="/adatvedelem" target="_blank">Adatvédelmi tájékoztatót</a>.
-                                </p>
 
                                 <button type="submit" className="bp-btn" disabled={tolt}>
                                     {tolt ? <span className="bp-spinner"></span> : "Regisztráció →"}

@@ -17,14 +17,9 @@ export default defineConfig([
     ],
     languageOptions: {
       ecmaVersion: 2020,
-      //globals: globals.browser,
       globals: {
-        require: "readonly",
-        module: "readonly",
-        exports: "readonly",
-        __dirname: "readonly",
-        __filename: "readonly",
-        process: "readonly"
+        ...globals.browser,
+        ...globals.node,
       },
       parserOptions: {
         ecmaVersion: 'latest',

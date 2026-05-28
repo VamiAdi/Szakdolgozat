@@ -52,15 +52,6 @@
     color: var(--c-primary);
 }
 
-.ro-sub {
-    font-size: 1rem;
-    color: #5a3f6b;
-    font-weight: 300;
-    line-height: 1.7;
-    max-width: 520px;
-    margin: 0 auto;
-}
-
 /* ── Csapat ── */
 .ro-team {
     background: var(--c-white);
@@ -91,12 +82,7 @@
     transform: translateY(-3px);
 }
 
-.ro-photo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: var(--c-placeholder);
-    border: 2px solid var(--c-border);
+.ro-card .expert-portrait {
     margin: 0 auto 1.25rem;
 }
 

@@ -78,7 +78,7 @@ export async function adminAuthedFetch(input, init = {}) {
     const token = sessionStorage.getItem(ADMIN_ACCESS);
     const headers = new Headers(init.headers || {});
     if (token) headers.set("Authorization", `Bearer ${token}`);
-    if (init.body && !headers.has("Content-Type")) {
+    if (init.body && !headers.has("Content-Type") && !(init.body instanceof FormData)) {
         headers.set("Content-Type", "application/json");
     }
     return fetch(input, { ...init, headers });

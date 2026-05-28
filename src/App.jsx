@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import './App.css';
 import {
     BrowserRouter as Router,
@@ -19,6 +18,8 @@ import Footer from "./Footer";
 import ProfilAdatok from "./pages/ProfilAdatok";
 import VedettUt from "./VedettUt";
 import Admin from "./pages/Admin";
+import NotFound from "./pages/NotFound";
+
 
 function Utak() {
     const { pathname } = useLocation();
@@ -37,6 +38,7 @@ function Utak() {
                 <Route path="/kapcsolat" element={<Kapcsolat />} />
                 <Route path="/profil/adatok" element={<VedettUt><ProfilAdatok /></VedettUt>} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
             {!adminOldal && <Footer />}
         </>
@@ -44,15 +46,6 @@ function Utak() {
 }
 
 function App() {
-    const [, setHalvany] = useState(null);
-
-    useEffect(() => {
-        fetch('http://localhost:3000/api/gyakorlat')
-            .then(res => res.json())
-            .then(data => setHalvany(data))
-            .catch(() => setHalvany(null));
-    }, []);
-
     return (
         <Router>
             <ScrollToTop />

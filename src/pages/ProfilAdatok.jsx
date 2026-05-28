@@ -2,22 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth, teljesNevMegjelenites, tokenekFrissiteseKenyszeritett } from "../auth";
 import "./Profil.css";
-// ─────────────────────────────────────────────────────────────────
-// KEYCLOAK ADATMÓDOSÍTÁS
-//
-// Az adatokat a Keycloak Admin REST API-n keresztül kell frissíteni.
-// A felhasználó saját adatait az Account REST API-val is módosíthatja:
-//
-// PUT /realms/{realm}/account
-// Authorization: Bearer {access_token}
-// Body: { firstName, lastName, email, attributes: { telefon } }
-//
-// Jelszóváltoztatáshoz:
-// POST /realms/{realm}/account/credentials/password
-// Body: { currentPassword, newPassword, confirmation }
-// ─────────────────────────────────────────────────────────────────
 
-// Teljes név egy mezőben: "Vezetéknév Keresztnév..." (első szó vezetéknév)
+// Teljes név egy mezőben: "Vezetéknév Keresztnév" (első szó vezetéknév)
 function nevSorbolKeycloakMezők(nev) {
     const parts = nev.trim().split(/\s+/).filter(Boolean);
     if (parts.length === 0) return { firstName: "", lastName: "" };

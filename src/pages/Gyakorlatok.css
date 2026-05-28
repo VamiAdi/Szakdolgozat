@@ -178,6 +178,8 @@
 }
 
 .body-svg {
+    position: relative;
+    z-index: 1;
     width: 160px;
     height: auto;
 }
@@ -186,10 +188,29 @@
     .body-svg { width: 130px; }
 }
 
+/* Háttérkép wrapper */
+.body-svg-wrap {
+    position: relative;
+    width: 160px;
+}
+
+/* Háttérkép a test mögött */
+.body-svg-hatter {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    opacity: 0.40;
+}
+
+/* SVG átlátszó — látszik a háttérkép */
 .body-shape {
-    fill: var(--c-placeholder);
-    stroke: var(--c-border);
-    stroke-width: 1;
+    fill: transparent;
+    stroke: transparent;
 }
 
 .body-zone {
@@ -202,7 +223,7 @@
 }
 
 .zone-circle {
-    fill: rgba(255, 255, 255, 0.7);
+    fill: rgba(255, 255, 255, 0.5);
     stroke: var(--c-border);
     stroke-width: 1.5;
     transition: fill 0.15s, stroke 0.15s;
@@ -338,8 +359,6 @@
 
 /* ── CTA gomb ── */
 .gy-btn-primary {
-    /* display: inline-flex;
-    align-items: center; */
     display: flex;
     align-items: center;
     gap: 8px;
@@ -355,7 +374,6 @@
     transition: background 0.2s, transform 0.15s;
     letter-spacing: 0.02em;
     box-shadow: 0 4px 20px rgba(142, 36, 170, 0.25);
-    /* margin-top: 0.5rem; */
     margin: 0 auto 2.5rem;
 }
 
@@ -432,7 +450,8 @@
 
 /* ── Eredmény ── */
 .gy-eredmeny-oldal {
-    max-width: 800px;
+    max-width: 1100px;
+    width: 100%;
     margin: 0 auto;
     padding: 4rem 2rem 5rem;
     display: flex;
@@ -484,20 +503,53 @@
     min-width: 36px;
 }
 
+.gy-gyakorlat-kartya .gy-pl-szam,
+.gy-gyakorlat-kartya .gy-checkbox-wrap {
+    align-self: center;
+}
+
 .gy-pl-video {
-    width: 120px;
-    height: 80px;
-    border-radius: 8px;
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
     background: var(--c-placeholder);
     flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.gy-pl-video--has-video {
+    background: #1a1024;
+}
+
+.gy-pl-video-inner {
+    width: 100%;
+    height: 100%;
+}
+
+.gy-pl-video-elem {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: inherit;
+    background: #000;
+    border: 0;
 }
 
 .gy-pl-info {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
     padding-top: 0.25rem;
+}
+
+.gy-pl-info p {
+    line-height: 1.65;
 }
 
 .gy-pl-sor {
@@ -551,7 +603,7 @@
 
 .gy-gyakorlat-kartya.gy-vendeg {
     cursor: default;
-    grid-template-columns: 60px 200px 1fr;
+    grid-template-columns: 60px minmax(280px, 360px) minmax(0, 1fr);
 }
 
 .gy-haladas-szoveg {
@@ -562,9 +614,9 @@
 
 .gy-gyakorlat-kartya {
     display: grid;
-    grid-template-columns: 60px 200px 1fr auto;
+    grid-template-columns: 60px minmax(280px, 360px) minmax(0, 1fr) auto;
     gap: 1.25rem;
-    align-items: center;
+    align-items: start;
     padding: 1.25rem 1.5rem;
     background: #fff;
     border: 1px solid #e9def2;
@@ -653,8 +705,14 @@
         grid-template-columns: 1fr;
         gap: 0.75rem;
     }
-    .gy-pl-szam {
+    .gy-gyakorlat-kartya .gy-pl-szam {
         align-self: start;
+    }
+    .gy-pl-video {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
     }
     .gy-checkbox-wrap {
         flex-direction: row;

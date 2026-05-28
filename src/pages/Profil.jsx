@@ -164,15 +164,12 @@ export default function Profil() {
         return s;
     }, [haladas]);
 
-    // const monogram = (nev || "?").trim().charAt(0).toUpperCase() || "?";
-
     return (
         <div className="pr-page">
 
             {/* Fejléc */}
             <section className="pr-hero">
                 <div className="pr-hero-inner">
-                    {/* <div className="pr-avatar">{monogram}</div> */}
                     <div className="pr-hero-szoveg">
                         <span className="pr-eyebrow">Profil</span>
                         <h1 className="pr-cim">{nev || "Profil"}</h1>

@@ -6,6 +6,8 @@ import {
     adminBelepveVan,
     apiUrl,
 } from "../adminAuth";
+import AdminVideoField from "../components/AdminVideoField";
+import { inferVideoMod } from "../videoLink";
 import "./Admin.css";
 
 /** Ugyanazok az id-k, mint a Gyakorlatok oldalon. */
@@ -23,12 +25,9 @@ const TESTRESZ_OPCIok = [
     { id: "7", nev: "Combhajlító", oldal: "Hátulnézet" },
 ];
 
-const TIPUS_OPCIok = [
+const TIPUS_OPCIOK = [
     { id: "nyujtas", nev: "Nyújtás" },
     { id: "erosites", nev: "Erősítés" },
-    { id: "mobilizalas", nev: "Mobilizálás" },
-    { id: "aktivalas", nev: "Aktiválás" },
-    { id: "stabilizalas", nev: "Stabilizálás" },
 ];
 
 /** Tábla edit — szerver rekord másolata űrlapmezőkhöz (kulcs = id). */
@@ -40,6 +39,7 @@ function gySorAdatInicializalas(r) {
         leiras: r.leiras == null ? "" : String(r.leiras),
         ismetlesszam: r.ismetlesszam == null ? "" : String(r.ismetlesszam),
         video_link: r.video_link == null ? "" : String(r.video_link),
+        video_mod: inferVideoMod(r.video_link),
     };
 }
 
@@ -83,9 +83,13 @@ export default function Admin() {
     const [ujLeiras, setUjLeiras] = useState("");
     const [ujIsm, setUjIsm] = useState("");
     const [ujVideo, setUjVideo] = useState("");
+    const [ujVideoMod, setUjVideoMod] = useState("url");
+    const [ujVideoPending, setUjVideoPending] = useState(null);
 
     /** Tábla szerkesztés állapota soronként id alapján */
     const [sorPiszka, setSorPiszka] = useState({});
+    /** Fájl mód: kiválasztott, de még nem feltöltött videó soronként */
+    const [sorVideoPending, setSorVideoPending] = useState({});
     /** Mely sor mentése/törlése fut éppen */
     const [listaMuveletToltes, setListaMuveletToltes] = useState(null);
 
@@ -119,6 +123,7 @@ export default function Admin() {
             const lista = adat.gyakorlatok || [];
             setGyLista(lista);
             setSorPiszka(piszkaGyListabol(lista));
+            setSorVideoPending({});
         } catch (err) {
             console.error(err);
             setHiba(
@@ -156,6 +161,10 @@ export default function Admin() {
         const numId = sor != null ? Number(sor.id) : Number(gyId);
         if (!p || !sor || !Number.isInteger(numId) || numId < 1) {
             setHiba("A sor nem menthető — frissítse a listát, majd próbálja újra.");
+            return;
+        }
+        if (p.video_mod === "file" && sorVideoPending[k]) {
+            setHiba("A kiválasztott videót még fel kell tölteni, mielőtt menti a sort.");
             return;
         }
         setListaMuveletToltes({ id: numId, muvelet: "mentes" });
@@ -384,6 +393,11 @@ export default function Admin() {
             setMentesTolt(false);
             return;
         }
+        if (ujVideoMod === "file" && ujVideoPending) {
+            setHiba("A kiválasztott videót még fel kell tölteni, mielőtt menti a gyakorlatot.");
+            setMentesTolt(false);
+            return;
+        }
         try {
             const res = await adminAuthedFetch(apiUrl("/api/admin/gyakorlatok"), {
                 method: "POST",
@@ -414,6 +428,8 @@ export default function Admin() {
             setUjLeiras("");
             setUjIsm("");
             setUjVideo("");
+            setUjVideoMod("url");
+            setUjVideoPending(null);
             await listaBetoltese();
         } catch (err) {
             console.error(err);
@@ -431,11 +447,6 @@ export default function Admin() {
                     <div className="admin-login-kartya">
                         <span className="admin-eyebrow">Rehabology</span>
                         <h1 style={{ textAlign: "center" }}>Admin bejelentkezés</h1>
-                        {/* <p style={{ margin: "0.5rem 0 1.5rem", color: "#674d7d", fontSize: "0.95rem" }}>
-                            Csak olyan fiókot használjon, amelyhez a Keycloakban a „realm-management” kliensen
-                            a <strong>realm-admin</strong> szerep van rendelve. A rehabilitáció realm ugyanaz,
-                            mint a nyilvános belépésnél („Direct access grants” a frontend kliensen).
-                        </p> */}
 
                         <form onSubmit={handleAdminBelepes}>
                             {hiba && (
@@ -568,7 +579,7 @@ export default function Admin() {
                                         className="admin-input"
                                         value={ujNev}
                                         onChange={(e) => setUjNev(e.target.value)}
-                                        placeholder="Pl. Vall nyújtás falnál"
+                                        placeholder="Pl. Váll nyújtás falnál"
                                     />
                                 </div>
                                 <div className="admin-mezogroup">
@@ -596,7 +607,7 @@ export default function Admin() {
                                         value={ujTipus}
                                         onChange={(e) => setUjTipus(e.target.value)}
                                     >
-                                        {TIPUS_OPCIok.map((t) => (
+                                        {TIPUS_OPCIOK.map((t) => (
                                             <option key={t.id} value={t.id}>
                                                 {t.nev}
                                             </option>
@@ -617,18 +628,15 @@ export default function Admin() {
                                 </div>
                             </div>
                             <div className="admin-mezogroup">
-                                <label htmlFor="gy-video">Videó (fájlnév vagy URL)</label>
-                                <input
-                                    id="gy-video"
-                                    className="admin-input"
+                                <label htmlFor="gy-video-url">Videó (opcionális)</label>
+                                <AdminVideoField
+                                    id="gy-video-url"
+                                    mod={ujVideoMod}
+                                    onModChange={setUjVideoMod}
                                     value={ujVideo}
-                                    onChange={(e) => setUjVideo(e.target.value)}
-                                    placeholder="Pl. vallnyujt1.mp4 vagy teljes URL"
+                                    onChange={setUjVideo}
+                                    onPendingFileChange={setUjVideoPending}
                                 />
-                                <p className="admin-help">
-                                    A videó mező értéke jelenik meg a gyakorlatok listájában; helyi fájloknál add a
-                                    projekt <code>public</code> könyvtárába és add meg a fájlnevet.
-                                </p>
                             </div>
                             <div className="admin-mezogroup">
                                 <label htmlFor="gy-leir">Leírás</label>
@@ -660,7 +668,7 @@ export default function Admin() {
                                 <code>video_link</code>. Az <code>id</code> oszlop figyelmen kívül marad. A{" "}
                                 <code>testresz_id</code> értéke 1–11 (pl. 6 = vállak). A <code>tipus</code> egyezzen
                                 a rendszerben használt kulccsal:{" "}
-                                {TIPUS_OPCIok.map((t) => t.id).join(", ")}. Az egész fájl egy tranzakcióban kerül
+                                {TIPUS_OPCIOK.map((t) => t.id).join(", ")}. Az egész fájl egy tranzakcióban kerül
                                 be; ha bármelyik sor hibás, semmi nem kerül mentésre.
                             </p>
                             <div className="admin-csv-sor">
@@ -715,7 +723,7 @@ export default function Admin() {
                                         <th>Testrész</th>
                                         <th>Típus</th>
                                         <th className="cell-ism">Ismétlés</th>
-                                        <th>Videó</th>
+                                        <th className="cell-video">Videó</th>
                                         <th>Leírás</th>
                                         <th className="cell-muv">Művelet</th>
                                     </tr>
@@ -768,7 +776,7 @@ export default function Admin() {
                                                         }
                                                         disabled={zaroltEsEz}
                                                     >
-                                                        {TIPUS_OPCIok.map((t) => (
+                                                        {TIPUS_OPCIOK.map((t) => (
                                                             <option key={t.id} value={t.id}>
                                                                 {t.nev}
                                                             </option>
@@ -789,13 +797,23 @@ export default function Admin() {
                                                         placeholder="—"
                                                     />
                                                 </td>
-                                                <td>
-                                                    <input
-                                                        className="admin-input admin-tbl-input"
-                                                        aria-label={`${r.id} videó`}
+                                                <td className="cell-video">
+                                                    <AdminVideoField
+                                                        id={`gy-video-${r.id}`}
+                                                        compact
+                                                        mod={p.video_mod ?? inferVideoMod(p.video_link)}
+                                                        onModChange={(ujMod) =>
+                                                            piszkaMezoValt(r.id, "video_mod", ujMod)
+                                                        }
                                                         value={p.video_link}
-                                                        onChange={(e) =>
-                                                            piszkaMezoValt(r.id, "video_link", e.target.value)
+                                                        onChange={(ertek) =>
+                                                            piszkaMezoValt(r.id, "video_link", ertek)
+                                                        }
+                                                        onPendingFileChange={(fajl) =>
+                                                            setSorVideoPending((prev) => ({
+                                                                ...prev,
+                                                                [gyIdStr(r.id)]: Boolean(fajl),
+                                                            }))
                                                         }
                                                         disabled={zaroltEsEz}
                                                     />
