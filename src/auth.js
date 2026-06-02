@@ -7,7 +7,7 @@ const ID = "kc_id_token";
 /** Ennyi másodperccel a lejárat előtt próbálunk refresh_tokennel új access tokent kérni */
 const REFRESH_SKEW_SEC = 120;
 
-/** Háttér ellenőrzés (ms) — lejárt session felismerése, refresh */
+/** Háttér ellenőrzés (ms) - lejárt session felismerése, refresh */
 const TICK_MS = 25000;
 
 function decodeJwtBase64(token) {
@@ -129,7 +129,7 @@ async function keycloakRefreshAccessToken(refreshToken) {
 
 /**
  * Új access/id token a refresh tokennel (pl. Keycloak Account API mentés után),
- * hogy a JWT claimjei — név, e-mail — azonnal frissüljenek a felületen (`useAuth`).
+ * hogy a JWT claimjei - név, e-mail - azonnal frissüljenek a felületen (`useAuth`).
  */
 export async function tokenekFrissiteseKenyszeritett() {
     const refresh = sessionStorage.getItem(REFRESH);

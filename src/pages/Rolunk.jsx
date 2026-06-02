@@ -4,7 +4,7 @@ import ExpertPortrait, { KATI_PORTRAIT, TOZSER_ANITA_PORTRAIT } from "../compone
 const CSAPAT = [
     {
         nev: "Páli Katalin",
-        szerep: "MSc Fizioterápia",
+        szerep: "MSc Humánkineziológia",
         bio: "Budapesti Honvéd Sportegyesület gyógytornásza és a Testnevelési Egyetem óraadója.",
         foto: KATI_PORTRAIT,
         fotoAlt: "Páli Katalin arckép",

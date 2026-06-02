@@ -3,7 +3,7 @@ const { getProgram } = require('./programModel')
 
 /**
  * Random N gyakorlat-id egy adott testrészre és típusra.
- * Postgres `random()` rendezéssel — ha kevesebb gyakorlat van, mint amennyit kérünk, mind visszajön.
+ * Postgres `random()` rendezéssel - ha kevesebb gyakorlat van, mint amennyit kérünk, mind visszajön.
  */
 async function pickRandom(testreszId, tipus, n) {
   const r = await pool.query(
@@ -54,7 +54,7 @@ async function generaltSorrend(testreszek, programTipus) {
   return out
 }
 
-/** Ugyanaz a mezőforma, mint a `getNapiSor`-ban (napi sor + joinolt gyakorlat), de vendég előnézet: `id` és `datum` üres — nem INSERT-elünk. */
+/* Ugyanaz a mezőforma, mint a `getNapiSor`-ban (napi sor + joinolt gyakorlat), de vendég előnézet: `id` és `datum` üres - nem INSERT-elünk. */
 async function guestPreviewRows(testreszek, programTipus) {
   const tr = testreszek.map(String)
   const sorrendIds = await generaltSorrend(tr, programTipus)
@@ -91,7 +91,7 @@ async function hydrateGyakorlatSoraban(sorrendIds) {
   return out
 }
 
-/** Mai napi gyakorlatsor — csak a felhasználó *jelenleg mentett* programjához tartozó ujjlenyomattal egyező sorok */
+/* Mai napi gyakorlatsor - csak a felhasználó jelenleg mentett programjához tartozó ujjlenyomattal egyező sorok */
 async function getNapiSor(userSub) {
   const program = await getProgram(userSub)
   if (!program) return []
@@ -120,11 +120,11 @@ async function getNapiSor(userSub) {
   return r.rows
 }
 
-/**
- * Mai napi sor a *jelenleg mentett* program ujjlenyomatához:
- * ha már van mai batch ehhez a fingerprinhez → visszaadjuk (visszaváltáskor ugyanaz a lista);
- * ha nincs → legeneráljuk — más programokhoz tartozó mai sorokat NEM töröljük.
- */
+/*
+  Mai napi sor a jelenleg mentett program ujjlenyomatához:
+  ha már van mai batch ehhez a fingerprinhez → visszaadjuk (visszaváltáskor ugyanaz a lista);
+  ha nincs → legeneráljuk - más programokhoz tartozó mai sorokat NEM töröljük.
+*/
 async function getOrCreateMaiSor(userSub) {
   const program = await getProgram(userSub)
   if (!program) return null
@@ -137,7 +137,7 @@ async function getOrCreateMaiSor(userSub) {
   const sorrend = await generaltSorrend(program.testreszek, program.program_tipus)
 
   if (sorrend.length === 0) {
-    console.warn('Üres napi sor generálódott — nincs illeszkedő gyakorlat?', {
+    console.warn('Üres napi sor generálódott - nincs illeszkedő gyakorlat?', {
       userSub,
       testreszek: program.testreszek,
       tipus: program.program_tipus,
@@ -167,7 +167,7 @@ async function getOrCreateMaiSor(userSub) {
   return await getNapiSor(userSub)
 }
 
-/** Egy konkrét napi rekord elvegezve állapotának frissítése — csak a jelenlegi program ujjlenyomatához tartozó sorra. */
+/* Egy konkrét napi rekord elvegezve állapotának frissítése - csak a jelenlegi program ujjlenyomatához tartozó sorra. */
 async function setElvegezve(userSub, napiId, ertek) {
   const program = await getProgram(userSub)
   if (!program) return null
@@ -184,11 +184,11 @@ async function setElvegezve(userSub, napiId, ertek) {
   return r.rows[0] || null
 }
 
-/**
- * Napi haladás összesítő — { 'YYYY-MM-DD': 'teljes' | 'reszleges' } map.
- * Azokat a napokat NEM tartalmazza, ahol egy gyakorlatot sem végzett el (== nincs aktív nap).
- * A belépés nélküli napokat sem (mert nincs is bejegyzés).
- */
+/*
+  Napi haladás összesítő - { 'YYYY-MM-DD': 'teljes' | 'reszleges' } map.
+  Azokat a napokat NEM tartalmazza, ahol egy gyakorlatot sem végzett el (== nincs aktív nap).
+  A belépés nélküli napokat sem (mert nincs is bejegyzés).
+*/
 async function getHaladas(userSub) {
   const r = await pool.query(
     `WITH nap_utols_program AS (

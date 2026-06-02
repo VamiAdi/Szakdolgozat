@@ -1,6 +1,6 @@
 const { pool } = require('./db')
 
-/** Rendezett testrész + típus egy string — két programválasztás közti egyezéshez */
+/** Rendezett testrész + típus egy string - két programválasztás közti egyezéshez */
 function programFingerprint(testreszek, programTipus) {
   const parts = [...testreszek].map(String).sort()
   return `${parts.join(',')}|${programTipus}`
@@ -16,7 +16,7 @@ async function getProgram(userSub) {
 }
 
 /**
- * Felhasználónként pontosan egy sor — UPSERT felülírja a testreszek + típus + ujjlenyomat mezőket.
+ * Felhasználónként pontosan egy sor - UPSERT felülírja a testreszek + típus + ujjlenyomat mezőket.
  */
 async function upsertProgram(userSub, testreszek, programTipus) {
   const fp = programFingerprint(testreszek, programTipus)

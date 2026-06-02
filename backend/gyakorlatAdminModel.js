@@ -16,9 +16,9 @@ const INSERT_SQL = `INSERT INTO gyakorlat (id, gyakorlat_nev, testresz_id, tipus
      VALUES ($1, $2, $3, $4, $5, $6, $7)
      RETURNING id, gyakorlat_nev, testresz_id, tipus, leiras, ismetlesszam, video_link`
 
-/**
- * Mező → DB érték (kötelező: érvényesített előtte).
- */
+/*
+  Mező → DB érték (kötelező: érvényesített előtte).
+*/
 function insertValuesGyakorlat(fields) {
   const {
     gyakorlat_nev,
@@ -38,9 +38,9 @@ function insertValuesGyakorlat(fields) {
   ]
 }
 
-/**
- * Következő id = legnagyobb tárolt id + 1. Tranzakción belül hívjuk, EXCLUSIVE táblázat-zárat tesz rá.
- */
+/*
+  Következő id = legnagyobb tárolt id + 1. Tranzakción belül hívjuk, EXCLUSIVE táblázat-zárat tesz rá.
+*/
 async function nextGyakorlatIdsStartAfterLock(client) {
   await client.query('LOCK TABLE gyakorlat IN EXCLUSIVE MODE')
   const mx = await client.query(
@@ -49,7 +49,7 @@ async function nextGyakorlatIdsStartAfterLock(client) {
   return Number(mx.rows[0].mx) + 1
 }
 
-/** Ha van SERIAL / IDENTITY szekvencia, igazítja a következő automatikus értékhez MAX(id) után. */
+/* Ha van SERIAL / IDENTITY szekvencia, igazítja a következő automatikus értékhez MAX(id) után. */
 async function syncGyakorlatIdSequenceSafe(client) {
   const nm = await client.query(
     `SELECT pg_get_serial_sequence('gyakorlat','id') AS nm`,
@@ -62,9 +62,9 @@ async function syncGyakorlatIdSequenceSafe(client) {
   )
 }
 
-/**
- * Tranzakción belül: MAX(id)+1, MAX(id)+2, … id-kkal beszúrja a sorokat, majd szekvenciát igazítja.
- */
+/*
+  Tranzakción belül: MAX(id)+1, MAX(id)+2, … id-kkal beszúrja a sorokat, majd szekvenciát igazítja.
+*/
 async function bulkInsertGyakorlatokWithAllocatedIds(client, fieldsLista) {
   let nid = await nextGyakorlatIdsStartAfterLock(client)
   const sorok = []
@@ -76,7 +76,7 @@ async function bulkInsertGyakorlatokWithAllocatedIds(client, fieldsLista) {
   return sorok
 }
 
-/** Tranzakción belüli INSERT; az id előre kiosztva (MAX+1, … sorozat bulknál). */
+/* Tranzakción belüli INSERT; az id előre kiosztva (MAX+1, … sorozat bulknál). */
 async function insertGyakorlatWithClient(client, fields, explicitId) {
   const vals = insertValuesGyakorlat(fields)
   const id = Number(explicitId)
@@ -111,10 +111,10 @@ async function deleteGyakorlatById(id) {
   return r.rows[0] || null
 }
 
-/**
- * Új gyakorlat rögzítése (admin).
- * testresz_id: alkalmazásban használt karakterláncként tároljuk (pl. „6”, „11”).
- */
+/*
+  Új gyakorlat rögzítése (admin).
+  testresz_id: alkalmazásban használt karakterláncként tároljuk (pl. „6”, „11”).
+*/
 async function createGyakorlat(fields) {
   const client = await pool.connect()
   try {

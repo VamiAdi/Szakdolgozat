@@ -1,4 +1,4 @@
-# Rehabology — szakdolgozati alkalmazás
+# Rehabology - szakdolgozati alkalmazás
 
 Rehabilitációs gyógytorna webalkalmazás React (Vite) frontenddel, Express backenddel, PostgreSQL adatbázissal és Keycloak hitelesítéssel.
 
@@ -26,7 +26,7 @@ cd ..
 
 ## Környezeti változók
 
-### Frontend — `.env` (projekt gyökér)
+### Frontend - `.env` (projekt gyökér)
 
 Hozz létre egy `.env` fájlt a gyökérben:
 
@@ -36,13 +36,13 @@ VITE_KEYCLOAK_REALM=rehabology
 VITE_KEYCLOAK_CLIENT_ID=rehabology-frontend
 VITE_API_URL=http://localhost:3001
 
-# Kapcsolat oldal (EmailJS) — opcionális
+# Kapcsolat oldal (EmailJS) - opcionális
 VITE_EMAILJS_PUBLIC_KEY=
 VITE_EMAILJS_SERVICE_ID=
 VITE_EMAILJS_TEMPLATE_ID=
 ```
 
-### Backend — `backend/.env`
+### Backend - `backend/.env`
 
 ```env
 KEYCLOAK_URL=http://localhost:8080
@@ -131,8 +131,8 @@ psql -U user -d rehab -f backend/migrations/002_program_fingerprint_es_napi_uniq
 
 Ezek létrehozzák:
 
-- `felhasznalo_program` — felhasználónként egy mentett program (testrészek + típus)
-- `napi_gyakorlat` — naponta generált gyakorlatsor (a `gyakorlat` táblára hivatkozik)
+- `felhasznalo_program` - felhasználónként egy mentett program (testrészek + típus)
+- `napi_gyakorlat` - naponta generált gyakorlatsor (a `gyakorlat` táblára hivatkozik)
 
 ---
 
@@ -174,7 +174,7 @@ docker compose -f docker-compose.keycloak.yml up -d
 cd backend
 npm start
 
-# 3. Frontend (port 5173) — új terminál, projekt gyökérből
+# 3. Frontend (port 5173) - új terminál, projekt gyökérből
 npm run dev
 ```
 
@@ -213,7 +213,7 @@ npm run lint     # ESLint
 | `tipus` | `nyujtas` vagy `erosites` |
 
 **Opcionális oszlopok:** `leiras`, `ismetlesszam`, `video_link`
-Az `id` oszlop figyelmen kívül marad — az új sorok azonosítója automatikusan növekszik.
+Az `id` oszlop figyelmen kívül marad - az új sorok azonosítója automatikusan növekszik.
 
 Példa fejléc:
 

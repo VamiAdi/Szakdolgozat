@@ -17,7 +17,7 @@ const UGYFEL_REG_ALTALANOS = "A regisztráció nem sikerült. Próbálja újra."
 const UGYFEL_REG_FIOK_KESZ =
     "A fiók elkészült. Kérjük, jelentkezzen be ugyanezzel az e-mail címmel és jelszóval.";
 
-/** Szándékosan közérthető API-üzenetek — bármi más → általános hiba. */
+/** Szándékosan közérthető API-üzenetek - bármi más → általános hiba. */
 const REG_API_FELHASZNALONAK = new Set([
     "Ez az e-mail cím már regisztrálva van.",
     "Minden mező kitöltendő.",

@@ -136,7 +136,7 @@ app.post('/api/regisztracio', async (req, res) => {
   }
 })
 
-/** Vendég / előnézet: nem ment semmit, JWT sem kell — ugyanaz a szűrős + véletlen sorrendű logika mint a mai napon. */
+/** Vendég / előnézet: nem ment semmit, JWT sem kell - ugyanaz a szűrős + véletlen sorrendű logika mint a mai napon. */
 app.post('/gyakorlatok', async (req, res) => {
   const { testreszek, tipus } = req.body || {}
   if (!Array.isArray(testreszek) || testreszek.length === 0) {
@@ -250,7 +250,7 @@ app.post('/api/admin/gyakorlatok', requireAdmin, async (req, res) => {
   }
 })
 
-/** Tömeges gyakorlat-import CSV-ből (egy tranzakció, elővalidálás — hibánál rollback). */
+/** Tömeges gyakorlat-import CSV-ből (egy tranzakció, elővalidálás - hibánál rollback). */
 app.post('/api/admin/gyakorlatok/csv-import', requireAdmin, async (req, res) => {
   const csv = req.body?.csv
   if (typeof csv !== 'string') {
@@ -328,7 +328,7 @@ app.get('/api/profil/program', requireAuth, async (req, res) => {
 /**
  * Program mentése: felülírja a felhasználó programját (testreszek + típus + fingerprint).
  * A korábban legenerált napi gyakorlat-rekordok MEGMARADNAK (más fingerprinttel ugyanazon a napon is).
- * A válaszban megjelenő lista: ma + *jelenleg mentett* program fingerprintje — ha már volt ilyen batch, azt adja vissza;
+ * A válaszban megjelenő lista: ma + *jelenleg mentett* program fingerprintje - ha már volt ilyen batch, azt adja vissza;
  * ha nem, újat generál (ON CONFLICT miatt nem írja felül a más programhoz tartozó sorokat).
  */
 app.post('/api/profil/program', requireAuth, async (req, res) => {
@@ -361,7 +361,7 @@ app.get('/api/napi-gyakorlat', requireAuth, async (req, res) => {
   try {
     const napiSor = await napiModel.getOrCreateMaiSor(req.user.sub)
     if (napiSor === null) {
-      return res.status(404).json({ message: 'Nincs még program — előbb állítson össze egyet.' })
+      return res.status(404).json({ message: 'Nincs még program - előbb állítson össze egyet.' })
     }
     return res.status(200).json({ napiSor })
   } catch (e) {
@@ -387,7 +387,7 @@ app.patch('/api/napi-gyakorlat/:id', requireAuth, async (req, res) => {
   }
 })
 
-// ─── Profil — haladás (naptárhoz) ──────────────────────────────────
+// ─── Profil - haladás (naptárhoz) ──────────────────────────────────
 
 app.get('/api/profil/haladas', requireAuth, async (req, res) => {
   try {

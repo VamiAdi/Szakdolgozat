@@ -19,7 +19,7 @@ const {
 /** Kötelező fejléc mezőnevek (normalize után így néznek ki). */
 const KOTELEZO_OSZLOPOK = ['gyakorlat_nev', 'testresz_id', 'tipus']
 
-/** Oszloponként alkalmazzuk az első sorra — extra oszlopok elnézése. */
+/** Oszloponként alkalmazzuk az első sorra - extra oszlopok elnézése. */
 function normalizaltFejlElem(s) {
   return String(s ?? '')
     .trim()
@@ -27,7 +27,7 @@ function normalizaltFejlElem(s) {
     .replace(/\s+/gu, '_')
 }
 
-/** Celles id pl. Excelből „06” vagy „6” → alkalmazásbeli kulcs („1”—„11”). */
+/** Celles id pl. Excelből „06” vagy „6” → alkalmazásbeli kulcs („1”-„11”). */
 function ellenorizTestreszId(ertek) {
   const s = String(ertek ?? '').trim()
   if (!s) return { ok: false }
@@ -102,7 +102,7 @@ async function importGyakorlatCsv(csvString) {
     }
 
     if (rekordok.length === 0) {
-      addHiba(null, 'Nincs adatsor — csak fejléc vagy üres fájl.')
+      addHiba(null, 'Nincs adatsor - csak fejléc vagy üres fájl.')
       return { ok: false, hibak }
     }
 

@@ -1,4 +1,4 @@
-# Keycloak + PostgreSQL — realmek és felhasználók a Postgres-ben maradnak (volume).
+# Keycloak + PostgreSQL - realmek és felhasználók a Postgres-ben maradnak (volume).
 #
 # Indítás (projekt gyökérből):
 #   docker compose -f docker-compose.keycloak.yml up -d
@@ -8,7 +8,7 @@
 #   docker compose -f docker-compose.keycloak.yml down -v
 #
 # Első indulás 1–3 perc is lehet (adatbázis séma). Admin: http://localhost:8080/admin
-# Jelszavak fejlesztéshez vannak — élesben secrets / erős jelszó.
+# Jelszavak fejlesztéshez vannak - élesben secrets / erős jelszó.
 #
 services:
   postgres:

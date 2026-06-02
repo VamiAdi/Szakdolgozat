@@ -13,7 +13,7 @@ export function adminBelepveVan() {
     return true;
 }
 
-/** realm-management / realm-admin JWT — külön a normál felhasználótól. */
+/* realm-management / realm-admin JWT - külön a normál felhasználótól. */
 export function adminTokenekMentese(d) {
     if (!d) return;
     if (d.access_token) sessionStorage.setItem(ADMIN_ACCESS, d.access_token);
@@ -84,5 +84,5 @@ export async function adminAuthedFetch(input, init = {}) {
     return fetch(input, { ...init, headers });
 }
 
-/** Admin végpont hívásokhoz teljes backend URL az auth apiUrl-hez igazítva. */
+/* Admin végpont hívásokhoz teljes backend URL az auth apiUrl-hez igazítva. */
 export { apiUrl };

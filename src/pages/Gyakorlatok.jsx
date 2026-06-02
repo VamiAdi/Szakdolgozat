@@ -484,7 +484,7 @@ export default function Gyakorlatok() {
                                 ? "Jelöljön be legalább egy testrészt."
                                 : !programTipus
                                 ? "Válasszon programtípust."
-                                : `Minden kész — ${kivalasztottNevek.join(", ")} · ${PROGRAMTIPUSOK.find(p => p.id === programTipus)?.nev}`
+                                : `Minden kész - ${kivalasztottNevek.join(", ")} · ${PROGRAMTIPUSOK.find(p => p.id === programTipus)?.nev}`
                             }
                         </p>
                     </div>
